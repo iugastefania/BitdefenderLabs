@@ -1,6 +1,18 @@
 version: '3.7'
 
 services:
+  events_api:
+    build:
+      context: .
+      dockerfile: ./events-api/Dockerfile
+    ports:
+      - "8000:8000"
+  files_api:
+    build:
+      context: .
+      dockerfile: ./files_api/Dockerfile
+    ports:
+      - "8001:8001"
   db:
     image: mongo:latest
     ports:
