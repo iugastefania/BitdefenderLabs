@@ -6,6 +6,6 @@ WORKDIR /app
 
 ENV TZ=Europe/Bucharest
 
-RUN pip install -r events_api/requirements.txt
+RUN pip install -r events-api/requirements.txt
 
-CMD python /app/events_api/main.py
+CMD python /app/events-api/main.py

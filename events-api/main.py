@@ -3,21 +3,21 @@ import sys, os
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE)
 
-from files_api.db import TestDatabase
+from filesapi.db import TestDatabase
 from event_model import Event
 from response_model import Response, BaseResponse
 import uvicorn
 from fastapi import FastAPI
 import sys
 
-sys.path.append('../files_api/')
+sys.path.append('../filesapi/')
 
 app = FastAPI()
 
 
 @app.get("/")
 async def root():
-    return {'title': 'Fast File System'}
+    return {'title': 'FastFile System'}
 
 
 @app.post("/events", response_model=Response)

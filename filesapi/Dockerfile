@@ -6,6 +6,6 @@ WORKDIR /app
 
 ENV TZ=Europe/Bucharest
 
-RUN pip install -r files_api/requirements.txt
+RUN pip install -r filesapi/requirements.txt
 
-CMD python /app/files_api/main.py
+CMD python /app/filesapi/main.py
