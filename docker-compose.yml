@@ -2,15 +2,21 @@ version: '3.7'
 
 services:
   events_api:
+    environment:
+      - MONGO_URL=mongodb://db:27017
     build:
       context: .
       dockerfile: ./events-api/Dockerfile
+    hostname: events-api
     ports:
       - "8000:8000"
   files_api:
+    environment:
+      - MONGO_URL=mongodb://db:27017
     build:
       context: .
       dockerfile: ./filesapi/Dockerfile
+    hostname: filesapi
     ports:
       - "8001:8001"
   db:
@@ -20,3 +26,21 @@ services:
     container_name: db
     volumes:
       - ./mongo_data:/data/db
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    container_name: redis
+    hostname: redis
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    container_name: prometheus
+    hostname: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+
+
+
