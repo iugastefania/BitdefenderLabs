@@ -9,11 +9,6 @@ from response_model import Response, BaseResponse
 import uvicorn
 from fastapi import FastAPI
 
-BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, BASE)
-
-sys.path.append('../filesapi/')
-
 app = FastAPI()
 
 @app.get("/")
@@ -50,5 +45,5 @@ async def add_event(event: Event) -> Response:
 
 Instrumentator().instrument(app).expose(app)
 if __name__ == '__main__':
-    uvicorn.run(app, port=8000)
-    # uvicorn.run(app, host="0.0.0.0", port=8000)
+    # uvicorn.run(app, port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
