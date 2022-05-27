@@ -3,6 +3,7 @@ import os
 
 import motor.motor_asyncio
 
+
 class TestDatabase:
     def __init__(self):
         mongo_url = os.getenv("MONGO_URL", "mongodb://localhost:27017")
@@ -15,6 +16,7 @@ class TestDatabase:
     async def find_data(self, some_key):
         return await self._collection.find_one({"hash": some_key})
 
+
 async def main():
     db = TestDatabase()
     await db.insert_data({"hash": "abc123", "other": 12})
@@ -22,6 +24,7 @@ async def main():
     print(f"f1:{doc}")
     doc = await db.find_data("abc123")
     print(f"f2:{doc}")
+
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(main())

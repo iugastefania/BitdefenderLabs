@@ -11,9 +11,11 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
+
 @app.get("/")
 async def root():
-    return {'title': 'FastFile System'}
+    return {"title": "FastFile System"}
+
 
 @app.post("/events", response_model=Response)
 async def add_event(event: Event) -> Response:
@@ -33,17 +35,20 @@ async def add_event(event: Event) -> Response:
 
         # scan file api
         if risk is not None:
-            r = risk['risk_level']
+            r = risk["risk_level"]
             await redis.set(event.file.file_hash, f"{r}")
             await redis.expire(event.file.file_hash, 25)
             print("Found in database")
 
     await redis.close()
 
-    return Response(file=BaseResponse(hash=event.file.file_hash, risk_level=r),
-                    process=BaseResponse(hash=event.last_access.hash, risk_level=r))
+    return Response(
+        file=BaseResponse(hash=event.file.file_hash, risk_level=r),
+        process=BaseResponse(hash=event.last_access.hash, risk_level=r),
+    )
+
 
 Instrumentator().instrument(app).expose(app)
-if __name__ == '__main__':
+if __name__ == "__main__":
     # uvicorn.run(app, port=8000)
     uvicorn.run(app, host="0.0.0.0", port=8000)
