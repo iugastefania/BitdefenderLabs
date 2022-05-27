@@ -5,6 +5,8 @@ ADD . /app
 WORKDIR /app
 
 ENV TZ=Europe/Bucharest
+ENV PYTHONPATH=/app
+
 
 RUN pip install -r events-api/requirements.txt
 
